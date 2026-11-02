@@ -41,6 +41,7 @@ func tokenize(line string) ([]Tok, string) {
 	var precedingOp bool
 	var skip int
 	var noPower bool
+	var opFlag bool
 
 	for i, char := range line {
 		if skip > 0 {
@@ -118,6 +119,7 @@ func tokenize(line string) ([]Tok, string) {
 
 			toks = append(toks, Tok{'o', line[i : i+skip+1], false})
 
+			opFlag = true
 			precedingOp = true
 
 		} else if word == "" && !singleQuoteFlag && !doubleQuoteFlag && (char == '#') {
@@ -148,6 +150,12 @@ func tokenize(line string) ([]Tok, string) {
 			word += string(char)
 		}
 
+		if opFlag {
+			opFlag = false
+		} else {
+			precedingOp = false
+		}
+
 		// for _, char := range w {
 		// 	if char == '\'' && singleQuoteFlag {
 		// 		singleQuoteFlag = false
@@ -164,7 +172,7 @@ func tokenize(line string) ([]Tok, string) {
 		// if !singleQuoteFlag && !doubleQuoteFlag {
 		// 	toks = append(toks, Tok{'w', word, false})
 		// }
-		precedingOp = false
+
 	}
 	if doubleQuoteFlag || singleQuoteFlag {
 		return nil, "unterminated quote"
