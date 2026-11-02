@@ -184,7 +184,9 @@ func tokenize(line string) ([]Tok, string) {
 	if len(word) > 0 && word[len(word)-1] == '\\' {
 		return nil, "trailing backslash"
 	}
-
+	if line == "" {
+		return toks, ""
+	}
 	toks = append(toks, Tok{'w', word, false})
 	return toks, ""
 }
