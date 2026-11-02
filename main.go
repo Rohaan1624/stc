@@ -85,6 +85,11 @@ func tokenize(line string) ([]Tok, string) {
 				precedingOp = false
 			}
 		} else if !singleQuoteFlag && !doubleQuoteFlag && slices.Contains(ops, string(char)) {
+			if noPower {
+				word += string(char)
+				noPower = false
+				continue
+			}
 			if i+2 <= len(line) && slices.Contains(ops, line[i:i+2]) {
 				skip = 1
 			} else if i+3 <= len(line) && slices.Contains(ops, line[i:i+3]) {
