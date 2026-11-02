@@ -147,6 +147,9 @@ func tokenize(line string) ([]Tok, string) {
 				word += string(char)
 			}
 		} else {
+			if !doubleQuoteFlag && !singleQuoteFlag && char == ' ' {
+				continue
+			}
 			word += string(char)
 		}
 
