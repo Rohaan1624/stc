@@ -178,7 +178,7 @@ func tokenize(line string) ([]Tok, string) {
 		return nil, "unterminated quote"
 	}
 
-	if len(line) > 0 && line[len(line)-1] == '\\' {
+	if len(word) > 0 && word[len(word)-1] == '\\' {
 		return nil, "trailing backlash"
 	}
 
