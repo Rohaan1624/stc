@@ -165,6 +165,9 @@ func tokenize(line string) ([]Tok, string) {
 	if doubleQuoteFlag || singleQuoteFlag {
 		return nil, "unterminated quote"
 	}
+	if line == "" {
+		return toks, ""
+	}
 	toks = append(toks, Tok{'w', word, false})
 	return toks, ""
 }
