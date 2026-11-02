@@ -19,9 +19,14 @@ type Tok struct {
 // Operators, longest first. A real tokenizer must find these without spaces around them.
 var ops = []string{"<<-", "&&", "||", ">>", "<<", ">&", "<&", "|", "&", ";", "<", ">"}
 
-// checkIsOp reports whether s is one of the operators in ops.
+// checkIsOp reports whether s is a backslash followed by a character that the
+// backslash can escape: an operator character, a quote, $, #, `, a space or
+// another backslash.
 func checkIsOp(s string) bool {
-	return slices.Contains(ops, s)
+	if len(s) < 2 || s[0] != '\\' {
+		return false
+	}
+	return strings.ContainsRune("|&;<>'\"$#` \\", rune(s[1]))
 }
 
 // tokenize splits one command line. The error string is empty on success, or
