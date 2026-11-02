@@ -98,7 +98,7 @@ func tokenize(line string) ([]Tok, string) {
 				skip = 1
 			}
 
-			if line[i:i+skip+1] == ">" || line[i:i+skip+1] == "<" {
+			if line[i : i+skip+1][0] == '>' || line[i : i+skip+1][0] == '<' {
 				if word != "" {
 					_, err := strconv.Atoi(word)
 					if err == nil {
