@@ -80,8 +80,10 @@ func tokenize(line string) ([]Tok, string) {
 		} else if (char == ' ' || char == '\t') && !singleQuoteFlag && !doubleQuoteFlag {
 
 			if !precedingOp {
-				toks = append(toks, Tok{'w', word, false})
-				word = ""
+				if word != "" || (i > 0 && strings.ContainsRune("\"'", rune(line[i-1]))) {
+					toks = append(toks, Tok{'w', word, false})
+					word = ""
+				}
 			} else {
 				precedingOp = false
 			}
