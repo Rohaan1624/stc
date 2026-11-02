@@ -83,6 +83,7 @@ func tokenize(line string) ([]Tok, string) {
 				if word != "" || (i > 0 && strings.ContainsRune("\"'", rune(line[i-1]))) {
 					toks = append(toks, Tok{'w', word, false})
 					word = ""
+					continue
 				}
 			} else {
 				precedingOp = false
