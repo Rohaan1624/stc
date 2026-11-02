@@ -30,6 +30,7 @@ func tokenize(line string) ([]Tok, string) {
 	var word string
 	var precedingOp bool
 	var skip int
+	var noPower bool
 
 	for i, char := range line {
 		if skip > 0 {
@@ -40,10 +41,18 @@ func tokenize(line string) ([]Tok, string) {
 		if char == '\'' && singleQuoteFlag {
 			singleQuoteFlag = false
 		} else if char == '\'' && !singleQuoteFlag && !doubleQuoteFlag {
+			if noPower {
+				word += string(char)
+				continue
+			}
 			singleQuoteFlag = true
 		} else if char == '"' && doubleQuoteFlag {
 			doubleQuoteFlag = false
 		} else if char == '"' && !singleQuoteFlag && !doubleQuoteFlag {
+			if noPower {
+				word += string(char)
+				continue
+			}
 			doubleQuoteFlag = true
 		} else if char == ' ' && !singleQuoteFlag && !doubleQuoteFlag {
 
@@ -81,9 +90,13 @@ func tokenize(line string) ([]Tok, string) {
 			precedingOp = true
 
 		} else if word == "" && !singleQuoteFlag && !doubleQuoteFlag && (char == '#') {
+			if noPower {
+				word += string(char)
+				continue
+			}
 			return toks, ""
 		} else if word == "" && !singleQuoteFlag && !doubleQuoteFlag && (char == '\\') {
-			continue
+			noPower = true
 		} else {
 			word += string(char)
 		}
