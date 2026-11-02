@@ -77,7 +77,7 @@ func tokenize(line string) ([]Tok, string) {
 				continue
 			}
 			doubleQuoteFlag = true
-		} else if char == ' ' && !singleQuoteFlag && !doubleQuoteFlag {
+		} else if (char == ' ' || char == '\t') && !singleQuoteFlag && !doubleQuoteFlag {
 
 			if !precedingOp {
 				toks = append(toks, Tok{'w', word, false})
@@ -147,12 +147,7 @@ func tokenize(line string) ([]Tok, string) {
 				word += string(char)
 			}
 		} else {
-			if !doubleQuoteFlag && !singleQuoteFlag && char == ' ' {
-				continue
-			} else {
-				word += string(char)
-			}
-
+			word += string(char)
 		}
 
 		if opFlag {
