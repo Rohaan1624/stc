@@ -19,6 +19,11 @@ type Tok struct {
 // Operators, longest first. A real tokenizer must find these without spaces around them.
 var ops = []string{"<<-", "&&", "||", ">>", "<<", ">&", "<&", "|", "&", ";", "<", ">"}
 
+// checkIsOp reports whether s is one of the operators in ops.
+func checkIsOp(s string) bool {
+	return slices.Contains(ops, s)
+}
+
 // tokenize splits one command line. The error string is empty on success, or
 // "unterminated quote" / "trailing backslash".
 func tokenize(line string) ([]Tok, string) {
@@ -75,9 +80,9 @@ func tokenize(line string) ([]Tok, string) {
 				precedingOp = false
 			}
 		} else if !singleQuoteFlag && !doubleQuoteFlag && slices.Contains(ops, string(char)) {
-			if slices.Contains(ops, line[i:i+2]) {
+			if i+2 <= len(line) && slices.Contains(ops, line[i:i+2]) {
 				skip = 1
-			} else if slices.Contains(ops, line[i:i+3]) {
+			} else if i+3 <= len(line) && slices.Contains(ops, line[i:i+3]) {
 				skip = 2
 			}
 
@@ -109,7 +114,14 @@ func tokenize(line string) ([]Tok, string) {
 			}
 			return toks, ""
 		} else if char == '\\' {
-			noPower = true
+
+			if i+2 <= len(line) && checkIsOp(line[i:i+2]) {
+				noPower = true
+				continue
+			} else {
+				word += string(char)
+			}
+
 		} else if char == '$' {
 			if noPower {
 				word += string(char)
