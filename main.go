@@ -190,7 +190,9 @@ func tokenize(line string) ([]Tok, string) {
 	if line == "" {
 		return toks, ""
 	}
-	toks = append(toks, Tok{'w', word, false})
+	if word != "" || (len(line) > 0 && strings.ContainsRune("\"'", rune(line[len(line)-1]))) {
+		toks = append(toks, Tok{'w', word, false})
+	}
 	return toks, ""
 }
 
