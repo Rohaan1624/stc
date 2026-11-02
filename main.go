@@ -178,6 +178,10 @@ func tokenize(line string) ([]Tok, string) {
 		return nil, "unterminated quote"
 	}
 
+	if len(line) > 0 && line[len(line)-1] == '\\' {
+		return nil, "trailing backlash"
+	}
+
 	toks = append(toks, Tok{'w', word, false})
 	return toks, ""
 }
