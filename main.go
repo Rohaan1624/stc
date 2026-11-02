@@ -90,10 +90,11 @@ func tokenize(line string) ([]Tok, string) {
 				noPower = false
 				continue
 			}
-			if i+2 <= len(line) && slices.Contains(ops, line[i:i+2]) {
-				skip = 1
-			} else if i+3 <= len(line) && slices.Contains(ops, line[i:i+3]) {
+
+			if i+3 <= len(line) && slices.Contains(ops, line[i:i+3]) {
 				skip = 2
+			} else if i+2 <= len(line) && slices.Contains(ops, line[i:i+2]) {
+				skip = 1
 			}
 
 			if line[i:i+skip+1] == ">" || line[i:i+skip+1] == "<" {
