@@ -81,7 +81,7 @@ func tokenize(line string) ([]Tok, string) {
 			precedingOp = true
 
 		} else if word == "" && !singleQuoteFlag && !doubleQuoteFlag && (char == '#') {
-			break
+			return toks, ""
 		} else {
 			word += string(char)
 		}
