@@ -1,0 +1,6 @@
+ls |
+| wc
+echo "x
+ls > > x
+cd /nope
+echo $?

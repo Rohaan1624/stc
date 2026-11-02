@@ -1,0 +1,4 @@
+SET NAME alice
+SET HOME /home/alice
+EXPAND hello $NAME!
+EXPAND ${NAME} lives in ${HOME}

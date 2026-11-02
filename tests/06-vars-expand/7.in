@@ -1,0 +1,2 @@
+SET F foo
+EXPAND ${F:+set}/${G:+set}/${F:-no}

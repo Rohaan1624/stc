@@ -1,0 +1,1 @@
+[grep] [-E] [^(foo|bar)$] [src/main.c]

@@ -1,0 +1,8 @@
+FG vim notes.txt
+TSTP
+JOBS
+BG
+JOBS
+FG %1
+TSTP
+JOBS

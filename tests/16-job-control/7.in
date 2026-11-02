@@ -1,0 +1,8 @@
+BG a
+BG b
+DONE %2
+BG c
+JOBS
+DONE %1
+BG d
+JOBS

@@ -1,0 +1,4 @@
+CMD cat <<'EOF'
+HEREDOC EOF expand=no strip=no
+|$HOME is literal
+END

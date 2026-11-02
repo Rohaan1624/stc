@@ -1,0 +1,1 @@
+[make] (&&) [make] [test] (||) [echo] [failed] (;) [echo] [done]

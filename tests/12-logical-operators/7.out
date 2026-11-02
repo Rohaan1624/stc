@@ -1,0 +1,6 @@
++ false
++ echo c
+c
++ echo d
+d
+status 0

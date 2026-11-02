@@ -1,0 +1,6 @@
+$ cmd 2> err.txt 1>&2
+OPEN err.txt WRONLY|CREAT|TRUNC -> 3
+DUP2 3 2
+CLOSE 3
+DUP2 2 1
+FD 0=tty 1=err.txt 2=err.txt

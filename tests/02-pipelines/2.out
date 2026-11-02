@@ -1,0 +1,3 @@
+PIPELINE 2
+1: [ls] [-la]
+2: [grep] [.py]

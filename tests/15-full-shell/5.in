@@ -1,0 +1,5 @@
+echo hi | cat
+cd /tmp | cat
+pwd
+echo hi > f
+pwd

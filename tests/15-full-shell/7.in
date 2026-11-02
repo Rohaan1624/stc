@@ -1,0 +1,6 @@
+cd /nope
+echo $?
+cd /tmp
+echo $?
+exit
+pwd

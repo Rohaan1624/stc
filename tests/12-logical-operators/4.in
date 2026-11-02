@@ -1,0 +1,2 @@
+status 3 && echo no
+status 3 || echo handled

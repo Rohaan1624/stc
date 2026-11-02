@@ -1,0 +1,1 @@
+mkdir build && cd build && make || echo failed

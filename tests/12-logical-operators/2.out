@@ -1,0 +1,6 @@
++ false
++ echo recovered
+recovered
+status 0
++ true
+status 0

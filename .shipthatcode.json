@@ -1,0 +1,74 @@
+{
+  "course": "build-shell",
+  "language": "go",
+  "language_id": 1060,
+  "entrypoint": "main.go",
+  "version": 1,
+  "content_hash": "8fb478e4a99580be",
+  "lessons": [
+    {
+      "slug": "tokenize",
+      "tests_hash": "b4631be18bfb"
+    },
+    {
+      "slug": "pipelines",
+      "tests_hash": "9d557fb1217d"
+    },
+    {
+      "slug": "redirects",
+      "tests_hash": "c9587db0ee9b"
+    },
+    {
+      "slug": "heredocs",
+      "tests_hash": "fd71907882e7"
+    },
+    {
+      "slug": "builtin-cd",
+      "tests_hash": "880c11a60d72"
+    },
+    {
+      "slug": "vars-expand",
+      "tests_hash": "74187fd41890"
+    },
+    {
+      "slug": "globbing",
+      "tests_hash": "4b933c9c3222"
+    },
+    {
+      "slug": "command-substitution",
+      "tests_hash": "3945c1108440"
+    },
+    {
+      "slug": "fork-exec",
+      "tests_hash": "9abe7df50b99"
+    },
+    {
+      "slug": "exec-pipeline",
+      "tests_hash": "03c80a6daf38"
+    },
+    {
+      "slug": "exec-redirects",
+      "tests_hash": "e2b2579a2093"
+    },
+    {
+      "slug": "logical-operators",
+      "tests_hash": "4ff2f349293d"
+    },
+    {
+      "slug": "signals",
+      "tests_hash": "1e72a08b9bd6"
+    },
+    {
+      "slug": "history",
+      "tests_hash": "475881bfcb90"
+    },
+    {
+      "slug": "full-shell",
+      "tests_hash": "74b00c6daea8"
+    },
+    {
+      "slug": "job-control",
+      "tests_hash": "b15c40a770be"
+    }
+  ]
+}

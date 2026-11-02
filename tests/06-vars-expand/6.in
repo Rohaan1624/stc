@@ -1,0 +1,2 @@
+SET EMPTY
+EXPAND [${EMPTY:-dflt}] [${EMPTY:+alt}] [${EMPTY}]

@@ -1,0 +1,7 @@
+ERR cannot change SIGKILL
+ERR cannot change SIGSTOP
+stopped
+stopped
+continued
+terminated
+terminated SIGKILL status=137

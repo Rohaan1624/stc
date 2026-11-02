@@ -1,0 +1,5 @@
+CMD cat <<EOF
+HEREDOC EOF expand=yes strip=no
+|hello
+|world
+END

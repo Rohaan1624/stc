@@ -1,0 +1,1 @@
+ps aux | grep nginx | awk '{print $2}' | sort -n | head -3

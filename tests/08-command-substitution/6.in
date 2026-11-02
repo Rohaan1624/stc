@@ -1,0 +1,1 @@
+EXPAND [$(printf 'one\ntwo\n')]

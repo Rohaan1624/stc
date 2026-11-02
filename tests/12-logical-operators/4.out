@@ -1,0 +1,6 @@
++ status 3
+status 3
++ status 3
++ echo handled
+handled
+status 0

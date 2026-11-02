@@ -1,0 +1,4 @@
+src/app.c src/util.c
+src/app.c src/util.c src/util.h
+src/app.c src/util.c
+src/lib/core.c

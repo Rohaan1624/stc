@@ -1,0 +1,5 @@
+CMD cat <<EOF | tr a-z A-Z
+HEREDOC EOF expand=yes strip=no
+|shout
+END
+CMD wc -l
