@@ -110,7 +110,7 @@ func tokenize(line string) ([]Tok, string) {
 			return toks, ""
 		} else if char == '\\' {
 			noPower = true
-		} else if char == '$' {
+		} else if char == '$' && !singleQuoteFlag && !doubleQuoteFlag {
 			if noPower {
 				word += string(char)
 				noPower = false
