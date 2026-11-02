@@ -164,7 +164,7 @@ func tokenize(line string) ([]Tok, string) {
 		// if !singleQuoteFlag && !doubleQuoteFlag {
 		// 	toks = append(toks, Tok{'w', word, false})
 		// }
-
+		precedingOp = false
 	}
 	if doubleQuoteFlag || singleQuoteFlag {
 		return nil, "unterminated quote"
