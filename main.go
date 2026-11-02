@@ -100,8 +100,11 @@ func tokenize(line string) ([]Tok, string) {
 				if word != "" {
 					_, err := strconv.Atoi(word)
 					if err == nil {
-						toks = append(toks, Tok{'i', word, false})
-						word = ""
+						if !strings.ContainsAny(line[i-len(word):i], "\"'") {
+
+							toks = append(toks, Tok{'i', word, false})
+							word = ""
+						}
 					}
 
 				}
