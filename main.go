@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"slices"
+	"strconv"
 	"strings"
 )
 
@@ -23,9 +25,87 @@ func tokenize(line string) ([]Tok, string) {
 	// TODO: replace this space split with a character-by-character walk that handles
 	// quotes, backslashes, operators, IO numbers and comments.
 	var toks []Tok
-	for _, w := range strings.Fields(line) {
-		toks = append(toks, Tok{'w', w, false})
+	var doubleQuoteFlag bool
+	var singleQuoteFlag bool
+	var word string
+	var precedingOp bool
+	var skip int
+
+	for i, char := range line {
+		if skip > 0 {
+			skip -= 1
+			continue
+		}
+
+		if char == '\'' && singleQuoteFlag {
+			singleQuoteFlag = false
+		} else if char == '\'' && !singleQuoteFlag && !doubleQuoteFlag {
+			singleQuoteFlag = true
+		} else if char == '"' && doubleQuoteFlag {
+			doubleQuoteFlag = false
+		} else if char == '"' && !singleQuoteFlag && !doubleQuoteFlag {
+			doubleQuoteFlag = true
+		} else if char == ' ' && !singleQuoteFlag && !doubleQuoteFlag {
+
+			if !precedingOp {
+				toks = append(toks, Tok{'w', word, false})
+				word = ""
+			} else {
+				precedingOp = false
+			}
+		} else if !singleQuoteFlag && !doubleQuoteFlag && slices.Contains(ops, string(char)) {
+			if slices.Contains(ops, line[i:i+2]) {
+				skip = 1
+			} else if slices.Contains(ops, line[i:i+3]) {
+				skip = 2
+			}
+
+			if line[i:i+skip+1] == ">" || line[i:i+skip+1] == "<" {
+				if word != "" {
+					_, err := strconv.Atoi(word)
+					if err == nil {
+						toks = append(toks, Tok{'i', word, false})
+						word = ""
+					}
+
+				}
+			}
+
+			if word != "" {
+				toks = append(toks, Tok{'w', word, false})
+				word = ""
+			}
+
+			toks = append(toks, Tok{'o', line[i : i+skip+1], false})
+
+			precedingOp = true
+
+		} else {
+			word += string(char)
+		}
+
+		// for _, char := range w {
+		// 	if char == '\'' && singleQuoteFlag {
+		// 		singleQuoteFlag = false
+		// 	} else if char == '\'' && !singleQuoteFlag && !doubleQuoteFlag {
+		// 		singleQuoteFlag = true
+		// 	} else if char == '"' && doubleQuoteFlag {
+		// 		doubleQuoteFlag = false
+		// 	} else if char == '"' && !singleQuoteFlag && !doubleQuoteFlag {
+		// 		doubleQuoteFlag = true
+		// 	} else {
+		// 		word += string(char)
+		// 	}
+		// }
+		// if !singleQuoteFlag && !doubleQuoteFlag {
+		// 	toks = append(toks, Tok{'w', word, false})
+		// }
+
 	}
+	if doubleQuoteFlag || singleQuoteFlag {
+		return nil, "unterminated quote"
+	}
+	toks = append(toks, Tok{'w', word, false})
 	return toks, ""
 }
 
